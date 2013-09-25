@@ -17,15 +17,7 @@
     
     <div class="row">
         <div class="span7"> <!-- main inputs -->
-            <h2>
-                <?php echo Yii::t('FcrnModule.crud_static','Data')?>                <small>
-                    <?php echo $model->itemLabel ?>
-                </small>
-
-            </h2>
-
-
-            <div class="form-horizontal">
+             <div class="form-horizontal">
 
                 
                     <div class="control-group">

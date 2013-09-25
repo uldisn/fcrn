@@ -69,12 +69,12 @@ abstract class BaseFcrtCurrencyRate extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'fcrt_id' => Yii::t('FcrnModule.crud', 'Fcrt'),
-            'fcrt_fcsr_id' => Yii::t('FcrnModule.crud', 'Fcrt Fcsr'),
-            'fcrt_fcrn_id' => Yii::t('FcrnModule.crud', 'Fcrt Fcrn'),
-            'fcrt_to_fcrn_id' => Yii::t('FcrnModule.crud', 'Fcrt To Fcrn'),
-            'fcrt_date' => Yii::t('FcrnModule.crud', 'Fcrt Date'),
-            'fcrt_rate' => Yii::t('FcrnModule.crud', 'Fcrt Rate'),
+            'fcrt_id' => Yii::t('FcrnModule.crud', 'FcrtId'),
+            'fcrt_fcsr_id' => Yii::t('FcrnModule.crud', 'Source'),
+            'fcrt_fcrn_id' => Yii::t('FcrnModule.crud', 'Currency from'),
+            'fcrt_to_fcrn_id' => Yii::t('FcrnModule.crud', 'Currency to'),
+            'fcrt_date' => Yii::t('FcrnModule.crud', 'Date'),
+            'fcrt_rate' => Yii::t('FcrnModule.crud', 'Rate'),
         );
     }
 

@@ -1,13 +1,13 @@
 <?php
 $this->setPageTitle(
-    Yii::t('FcrnModule.crud', 'Fcrt Currency Rate')
+    Yii::t('FcrnModule.crud', 'Currency Rate')
     . ' - '
     . Yii::t('FcrnModule.crud_static', 'Create')
 );
 
 ?>
     <h1>
-        <?php echo Yii::t('FcrnModule.crud', 'Fcrt Currency Rate'); ?>
+        <?php echo Yii::t('FcrnModule.crud', 'Currency Rate'); ?>
         <small><?php echo Yii::t('FcrnModule.crud_static', 'Create'); ?></small>
 
     </h1>

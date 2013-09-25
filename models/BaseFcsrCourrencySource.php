@@ -63,9 +63,9 @@ abstract class BaseFcsrCourrencySource extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'fcsr_id' => Yii::t('FcrnModule.crud', 'Fcsr'),
-            'fcsr_name' => Yii::t('FcrnModule.crud', 'Fcsr Name'),
-            'fcsr_notes' => Yii::t('FcrnModule.crud', 'Fcsr Notes'),
+            'fcsr_id' => Yii::t('FcrnModule.crud', 'FcsrId'),
+            'fcsr_name' => Yii::t('FcrnModule.crud', 'Currency source'),
+            'fcsr_notes' => Yii::t('FcrnModule.crud', 'Notes'),
         );
     }
 

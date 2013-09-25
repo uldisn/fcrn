@@ -1,6 +1,6 @@
 <?php
 $this->setPageTitle(
-    Yii::t('FcrnModule.crud', 'Fcrt Currency Rates')
+    Yii::t('FcrnModule.crud', 'Currency Rates')
     . ' - '
     . Yii::t('FcrnModule.crud_static', 'Manage')
 );
@@ -20,10 +20,7 @@ Yii::app()->clientScript->registerScript('search', "
     ");
 ?>
     <h1>
-
-        <?php echo Yii::t('FcrnModule.crud', 'Fcrt Currency Rates'); ?>
-        <small><?php echo Yii::t('FcrnModule.crud_static', 'Manage'); ?></small>
-
+        <?php echo Yii::t('FcrnModule.crud', 'Currency Rates'); ?>
     </h1>
 
 <?php $this->renderPartial("_toolbar", array("model" => $model)); ?>

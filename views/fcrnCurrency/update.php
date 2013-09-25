@@ -1,6 +1,6 @@
 <?php
 $this->setPageTitle(
-        Yii::t('FcrnModule.crud', 'Fcrn Currency')
+        Yii::t('FcrnModule.crud', 'Currency')
         . ' - '
         . Yii::t('FcrnModule.crud_static', 'Update')
         . ': '   
@@ -9,7 +9,7 @@ $this->setPageTitle(
 ?>
     <h1>
         
-        <?php echo Yii::t('FcrnModule.crud','Fcrn Currency'); ?>
+        <?php echo Yii::t('FcrnModule.crud','Currency'); ?>
         <small>
             <?php echo Yii::t('FcrnModule.crud_static','Update')?>
         </small>

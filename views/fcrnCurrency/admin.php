@@ -1,6 +1,6 @@
 <?php
 $this->setPageTitle(
-    Yii::t('FcrnModule.crud', 'Fcrn Currencies')
+    Yii::t('FcrnModule.crud', 'Currencies')
     . ' - '
     . Yii::t('FcrnModule.crud_static', 'Manage')
 );
@@ -22,7 +22,7 @@ Yii::app()->clientScript->registerScript('search', "
 
     <h1>
 
-        <?php echo Yii::t('FcrnModule.crud', 'Fcrn Currencies'); ?>
+        <?php echo Yii::t('FcrnModule.crud', 'Currencies'); ?>
         <small><?php echo Yii::t('FcrnModule.crud_static', 'Manage'); ?></small>
 
     </h1>

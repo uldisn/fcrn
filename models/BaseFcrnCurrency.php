@@ -60,8 +60,8 @@ abstract class BaseFcrnCurrency extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'fcrn_id' => Yii::t('FcrnModule.crud', 'Fcrn'),
-            'fcrn_code' => Yii::t('FcrnModule.crud', 'Fcrn Code'),
+            'fcrn_id' => Yii::t('FcrnModule.crud', 'FcrnId'),
+            'fcrn_code' => Yii::t('FcrnModule.crud', 'Currency code'),
         );
     }
 
