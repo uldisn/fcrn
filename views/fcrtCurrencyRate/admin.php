@@ -22,12 +22,23 @@ Yii::app()->clientScript->registerScript('search', "
     <h1>
         <?php echo Yii::t('FcrnModule.crud', 'Currency Rates'); ?>
     </h1>
-
-<?php $this->renderPartial("_toolbar", array("model" => $model)); ?>
-
-
-
 <?php
+$aFcsr = array();
+foreach ($mFcsr as $m) {
+    $aFcsr[] = array(
+        'label'   => Yii::t('app', $m->fcsr_name),
+        'url'     => Yii::app()->controller->createUrl('admin',array('fcsr_id'=>$m->fcsr_id)),
+        'active'  => ($fcsr_id == $m->fcsr_id)        
+    );
+}
+$this->widget(
+    'TbMenu',
+    array(
+         'type'  => 'tabs',
+         'items' => $aFcsr,
+        ));
+$this->renderPartial("_toolbar", array("model" => $model));
+
 $this->widget('TbGridView',
     array(
         'id' => 'fcrt-currency-rate-grid',
@@ -99,4 +110,3 @@ $this->widget('TbGridView',
         )
     )
 );
-?>

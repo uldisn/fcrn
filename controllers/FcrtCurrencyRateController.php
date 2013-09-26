@@ -16,25 +16,24 @@ return array(
 );
 }
 
-public function accessRules()
-{
-return array(
-array(
-'allow',
-'actions' => array('create', 'editableSaver', 'update', 'delete', 'admin', 'view'),
-'roles' => array('currency.admin'),
-),
-array(
-'allow',
-'actions' => array('admin', 'view'),
-'roles' => array('currency.view'),
-),
-array(
-'deny',
-'users' => array('*'),
-),
-);
-}
+public function accessRules() {
+        return array(
+            array(
+                'allow',
+                'actions' => array('create', 'editableSaver', 'update', 'delete','admin', 'view'),
+                'roles' => array(ROLE_CURRENCY_EDITOR),
+            ),
+            array(
+                'allow',
+                'actions' => array('admin', 'view'),
+                'roles' => array(ROLE_USER),
+            ),
+            array(
+                'deny',
+                'users' => array('*'),
+            ),
+        );
+    }
 
     public function beforeAction($action)
     {
@@ -134,20 +133,28 @@ array(
         }
     }
 
-    public function actionAdmin()
+    public function actionAdmin($fcsr_id = 0)
     {
         $model = new FcrtCurrencyRate('search');
+        
         $scopes = $model->scopes();
         if (isset($scopes[$this->scope])) {
             $model->{$this->scope}();
         }
+
+        //get submited filter parmeters and add additional param
         $model->unsetAttributes();
-
+        $aAtributes = array();
         if (isset($_GET['FcrtCurrencyRate'])) {
-            $model->attributes = $_GET['FcrtCurrencyRate'];
+            $aAtributes = $_GET['FcrtCurrencyRate'];
         }
+        $aAtributes['fcrt_fcsr_id'] = $fcsr_id;
+        $model->attributes = $aAtributes;
 
-        $this->render('admin', array('model' => $model,));
+        //currency source
+        $mFcsr = FcsrCourrencySource::model()->findAll();
+        
+        $this->render('admin', array('model' => $model,'fcsr_id'=>$fcsr_id,'mFcsr' => $mFcsr));
     }
 
     public function loadModel($id)
@@ -173,4 +180,6 @@ array(
         }
     }
 
+    
+    
 }

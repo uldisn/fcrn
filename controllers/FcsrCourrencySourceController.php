@@ -16,20 +16,24 @@ return array(
 );
 }
 
-public function accessRules()
-{
-return array(
-array(
-'allow',
-'actions' => array('create', 'editableSaver', 'update', 'delete', 'admin', 'view'),
-'roles' => array('admin'),
-),
-array(
-'deny',
-'users' => array('*'),
-),
-);
-}
+    public function accessRules() {
+        return array(
+            array(
+                'allow',
+                'actions' => array('create', 'editableSaver', 'update', 'delete','admin', 'view'),
+                'roles' => array(ROLE_ADMIN),
+            ),
+            array(
+                'allow',
+                'actions' => array('admin', 'view'),
+                'roles' => array(ROLE_USER),
+            ),
+            array(
+                'deny',
+                'users' => array('*'),
+            ),
+        );
+    }
 
     public function beforeAction($action)
     {
