@@ -50,7 +50,7 @@ public function accessRules() {
         $this->render('view', array('model' => $model,));
     }
 
-    public function actionCreate()
+    public function actionCreate($fcrt_fcsr_id,$fcrt_fcrn_id)
     {
         $model = new FcrtCurrencyRate;
         $model->scenario = $this->scenario;
@@ -59,13 +59,20 @@ public function accessRules() {
 
         if (isset($_POST['FcrtCurrencyRate'])) {
             $model->attributes = $_POST['FcrtCurrencyRate'];
-
+            $model->setAttribute('fcrt_fcsr_id', $fcrt_fcsr_id);
+            $model->setAttribute('fcrt_fcrn_id', $fcrt_fcrn_id);
+            
+            
             try {
                 if ($model->save()) {
                     if (isset($_GET['returnUrl'])) {
                         $this->redirect($_GET['returnUrl']);
                     } else {
-                        $this->redirect(array('admin', 'fcrt_id' => $model->fcrt_id));
+                        $this->redirect(array(
+                                            'admin', 
+                                            'fcrt_fcsr_id' => $model->fcrt_fcsr_id,
+                                            'fcrt_fcrn_id' => $model->fcrt_fcrn_id,
+                                ));
                     }
                 }
             } catch (Exception $e) {
@@ -78,7 +85,7 @@ public function accessRules() {
         $this->render('create', array('model' => $model));
     }
 
-    public function actionUpdate($fcrt_id)
+    public function actionUpdate()
     {
         $model = $this->loadModel($fcrt_id);
         $model->scenario = $this->scenario;
@@ -94,7 +101,7 @@ public function accessRules() {
                     if (isset($_GET['returnUrl'])) {
                         $this->redirect($_GET['returnUrl']);
                     } else {
-                        $this->redirect(array('admin', 'fcrt_id' => $model->fcrt_id));
+                        $this->redirect(array('admin', 'fcrt_fcsr_id' => $model->fcrt_fcsr_id));
                     }
                 }
             } catch (Exception $e) {
@@ -133,8 +140,22 @@ public function accessRules() {
         }
     }
 
-    public function actionAdmin($fcsr_id = 0)
+    public function actionAdmin($fcrt_fcsr_id = FALSE,$fcrt_fcrn_id = FALSE, $fcrt_date = FALSE)
     {
+        //currency source
+        $mFcsr = FcsrCourrencySource::model()->findAll();
+        if(!$fcrt_fcsr_id){
+            $fcrt_fcsr_id = $mFcsr[0]->fcsr_id;
+            $fcrt_fcrn_id = $mFcsr[0]->fcsr_base_fcrn_id;
+            $fcrt_date = date('Y.d.m');
+        }
+        
+        if (isset($_POST['fcrt_date'])) {
+            $fcrt_date = $_POST['fcrt_date'];
+        }
+        if(!$fcrt_date){
+            $fcrt_date = date("Y-m-d");
+        }
         $model = new FcrtCurrencyRate('search');
         
         $scopes = $model->scopes();
@@ -148,13 +169,19 @@ public function accessRules() {
         if (isset($_GET['FcrtCurrencyRate'])) {
             $aAtributes = $_GET['FcrtCurrencyRate'];
         }
-        $aAtributes['fcrt_fcsr_id'] = $fcsr_id;
+        $aAtributes['fcrt_fcsr_id'] = $fcrt_fcsr_id;
         $model->attributes = $aAtributes;
-
-        //currency source
-        $mFcsr = FcsrCourrencySource::model()->findAll();
         
-        $this->render('admin', array('model' => $model,'fcsr_id'=>$fcsr_id,'mFcsr' => $mFcsr));
+        $this->render(
+                'admin', 
+                array(
+                    'model' => $model,
+                    'fcrt_fcsr_id'=>$fcrt_fcsr_id,
+                    'fcrt_fcrn_id'=>$fcrt_fcrn_id,
+                    'fcrt_date'=>$fcrt_date,
+                    'mFcsr' => $mFcsr,
+                )
+                );
     }
 
     public function loadModel($id)

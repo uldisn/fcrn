@@ -37,60 +37,6 @@
                 
                     <div class="control-group">
                         <div class='control-label'>
-                            <?php echo $form->labelEx($model, 'fcrt_fcsr_id') ?>
-                        </div>
-                        <div class='controls'>
-                            <?php
-                            $this->widget(
-                '\GtcRelation',
-                array(
-                    'model' => $model,
-                    'relation' => 'fcrtFcsr',
-                    'fields' => 'itemLabel',
-                    'allowEmpty' => true,
-                    'style' => 'dropdownlist',
-                    'htmlOptions' => array(
-                        'checkAll' => 'all'
-                    ),
-                )
-                );
-                            echo $form->error($model,'fcrt_fcsr_id')
-                            ?>
-                            <span class="help-block">
-                                <?php echo ($t = Yii::t('FcrnModule.crud', 'FcrtCurrencyRate.fcrt_fcsr_id') != 'FcrtCurrencyRate.fcrt_fcsr_id')?$t:'' ?>
-                            </span>
-                        </div>
-                    </div>
-                
-                    <div class="control-group">
-                        <div class='control-label'>
-                            <?php echo $form->labelEx($model, 'fcrt_fcrn_id') ?>
-                        </div>
-                        <div class='controls'>
-                            <?php
-                            $this->widget(
-                '\GtcRelation',
-                array(
-                    'model' => $model,
-                    'relation' => 'fcrtFcrn',
-                    'fields' => 'itemLabel',
-                    'allowEmpty' => true,
-                    'style' => 'dropdownlist',
-                    'htmlOptions' => array(
-                        'checkAll' => 'all'
-                    ),
-                )
-                );
-                            echo $form->error($model,'fcrt_fcrn_id')
-                            ?>
-                            <span class="help-block">
-                                <?php echo ($t = Yii::t('FcrnModule.crud', 'FcrtCurrencyRate.fcrt_fcrn_id') != 'FcrtCurrencyRate.fcrt_fcrn_id')?$t:'' ?>
-                            </span>
-                        </div>
-                    </div>
-                
-                    <div class="control-group">
-                        <div class='control-label'>
                             <?php echo $form->labelEx($model, 'fcrt_to_fcrn_id') ?>
                         </div>
                         <div class='controls'>

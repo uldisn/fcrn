@@ -72,6 +72,33 @@
                             </span>
                         </div>
                     </div>
+                    <div class="control-group">
+                        <div class='control-label'>
+                            <?php echo $form->labelEx($model, 'fcsr_base_fcrn_id') ?>
+                        </div>
+                        <div class='controls'>
+                            <?php
+                            $this->widget(
+                '\GtcRelation',
+                array(
+                    'model' => $model,
+                    'relation' => 'fcsrBaseFcrn',
+                    'fields' => 'itemLabel',
+                    'allowEmpty' => true,
+                    'style' => 'dropdownlist',
+                    'htmlOptions' => array(
+                        'checkAll' => 'all'
+                    ),
+                )
+                );
+                            echo $form->error($model,'fcsr_base_fcrn_id')
+                            ?>
+                            <span class="help-block">
+                                <?php echo ($t = Yii::t('FcrnModule.crud', 'FcsrCourrencySource.fcsr_base_fcrn_id') != 'FcsrCourrencySource.fcsr_base_fcrn_id')?$t:'' ?>
+                            </span>
+                        </div>
+                    </div>
+                
                 
             </div>
         </div>

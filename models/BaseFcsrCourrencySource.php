@@ -7,9 +7,11 @@
  * @property integer $fcsr_id
  * @property string $fcsr_name
  * @property string $fcsr_notes
+ * @property integer $fcsr_base_fcrn_id
  *
  * Relations of table "fcsr_courrency_source" available as properties of the model:
  * @property FcrtCurrencyRate[] $fcrtCurrencyRates
+ * @property FcrnCurrency $fcsrBaseFcrn
  */
 abstract class BaseFcsrCourrencySource extends CActiveRecord
 {
@@ -29,10 +31,11 @@ abstract class BaseFcsrCourrencySource extends CActiveRecord
         return array_merge(
             parent::rules(), array(
                 array('fcsr_name', 'required'),
-                array('fcsr_notes', 'default', 'setOnEmpty' => true, 'value' => null),
+                array('fcsr_notes, fcsr_base_fcrn_id', 'default', 'setOnEmpty' => true, 'value' => null),
+                array('fcsr_base_fcrn_id', 'numerical', 'integerOnly' => true),
                 array('fcsr_name', 'length', 'max' => 50),
                 array('fcsr_notes', 'safe'),
-                array('fcsr_id, fcsr_name, fcsr_notes', 'safe', 'on' => 'search'),
+                array('fcsr_id, fcsr_name, fcsr_notes, fcsr_base_fcrn_id', 'safe', 'on' => 'search'),
             )
         );
     }
@@ -57,6 +60,7 @@ abstract class BaseFcsrCourrencySource extends CActiveRecord
     {
         return array(
             'fcrtCurrencyRates' => array(self::HAS_MANY, 'FcrtCurrencyRate', 'fcrt_fcsr_id'),
+            'fcsrBaseFcrn' => array(self::BELONGS_TO, 'FcrnCurrency', 'fcsr_base_fcrn_id'),
         );
     }
 
@@ -66,6 +70,7 @@ abstract class BaseFcsrCourrencySource extends CActiveRecord
             'fcsr_id' => Yii::t('FcrnModule.crud', 'FcsrId'),
             'fcsr_name' => Yii::t('FcrnModule.crud', 'Currency source'),
             'fcsr_notes' => Yii::t('FcrnModule.crud', 'Notes'),
+            'fcsr_base_fcrn_id' => Yii::t('FcrnModule.crud', 'Base Currency'),
         );
     }
 
@@ -78,6 +83,7 @@ abstract class BaseFcsrCourrencySource extends CActiveRecord
         $criteria->compare('t.fcsr_id', $this->fcsr_id);
         $criteria->compare('t.fcsr_name', $this->fcsr_name, true);
         $criteria->compare('t.fcsr_notes', $this->fcsr_notes, true);
+        $criteria->compare('t.fcsr_base_fcrn_id', $this->fcsr_base_fcrn_id);
 
         return new CActiveDataProvider(get_class($this), array(
             'criteria' => $criteria,

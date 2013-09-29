@@ -20,6 +20,10 @@
         <?php echo $form->textArea($model, 'fcsr_notes', array('rows' => 6, 'cols' => 50)); ?>
     </div>
 
+    <div class="row">
+        <?php echo $form->label($model, 'fcsr_base_fcrn_id'); ?>
+        <?php echo $form->textField($model, 'fcsr_base_fcrn_id'); ?>
+    </div>    
 
     <div class="row buttons">
         <?php echo CHtml::submitButton(Yii::t('FcrnModule.crud_static', 'Search')); ?>

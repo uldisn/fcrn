@@ -26,18 +26,40 @@ Yii::app()->clientScript->registerScript('search', "
 $aFcsr = array();
 foreach ($mFcsr as $m) {
     $aFcsr[] = array(
-        'label'   => Yii::t('app', $m->fcsr_name),
-        'url'     => Yii::app()->controller->createUrl('admin',array('fcsr_id'=>$m->fcsr_id)),
-        'active'  => ($fcsr_id == $m->fcsr_id)        
+        'label'   => Yii::t('app', $m->fcsr_name . ' ' . $m->fcsrBaseFcrn->fcrn_code),
+        'url'     => Yii::app()->controller->createUrl(
+                'admin',
+                array(
+                    'fcrt_fcsr_id'=>$m->fcsr_id,
+                    'fcrt_fcrn_id'=>$m->fcsr_base_fcrn_id,
+                    'fcrt_date'=>$fcrt_date,
+                    )
+                ),
+        'active'  => ($fcrt_fcsr_id == $m->fcsr_id)        
     );
 }
+        
 $this->widget(
     'TbMenu',
     array(
          'type'  => 'tabs',
          'items' => $aFcsr,
         ));
-$this->renderPartial("_toolbar", array("model" => $model));
+
+//date fiels
+$this->renderPartial('_form_fcrt_date', array('fcrt_date' => $fcrt_date));
+
+$aUrlParam = array(
+    'fcrt_fcsr_id' => $fcrt_fcsr_id,
+    'fcrt_fcrn_id' => $fcrt_fcrn_id,
+    'fcrt_date'=>$fcrt_date,    
+        );
+$this->widget("bootstrap.widgets.TbButton", array(
+    "label"=>Yii::t("FcrnModule.crud_static","Create"),
+    "icon"=>"icon-plus",
+    "url"=>Yii::app()->controller->createUrl("create",$aUrlParam),
+    "visible"=>Yii::app()->user->checkAccess("Fcrn.FcrtCurrencyRate.Create")
+));
 
 $this->widget('TbGridView',
     array(
@@ -50,35 +72,6 @@ $this->widget('TbGridView',
             'displayFirstAndLast' => true,
         ),
         'columns' => array(
-//            array(
-//                'class' => 'CLinkColumn',
-//                'header' => '',
-//                'labelExpression' => '$data->itemLabel',
-//                'urlExpression' => 'Yii::app()->controller->createUrl("view", array("fcrt_id" => $data["fcrt_id"]))'
-//            ),
-//            array(
-//                'class' => 'editable.EditableColumn',
-//                'name' => 'fcrt_id',
-//                'editable' => array(
-//                    'url' => $this->createUrl('/fcrn/fcrtCurrencyRate/editableSaver'),
-//                    //'placement' => 'right',
-//                )
-//            ),
-            array(
-                'name' => 'fcrt_fcsr_id',
-                'value' => 'CHtml::value($data, \'fcrtFcsr.itemLabel\')',
-                'filter' => CHtml::listData(FcsrCourrencySource::model()->findAll(array('limit' => 1000)), 'fcsr_id', 'itemLabel'),
-            ),
-            array(
-                'name' => 'fcrt_fcrn_id',
-                'value' => 'CHtml::value($data, \'fcrtFcrn.itemLabel\')',
-                'filter' => CHtml::listData(FcrnCurrency::model()->findAll(array('limit' => 1000)), 'fcrn_id', 'itemLabel'),
-            ),
-            array(
-                'name' => 'fcrt_to_fcrn_id',
-                'value' => 'CHtml::value($data, \'fcrtToFcrn.itemLabel\')',
-                'filter' => CHtml::listData(FcrnCurrency::model()->findAll(array('limit' => 1000)), 'fcrn_id', 'itemLabel'),
-            ),
             array(
                 'class' => 'editable.EditableColumn',
                 'name' => 'fcrt_date',
@@ -104,7 +97,13 @@ $this->widget('TbGridView',
                     'delete' => array('visible' => 'FALSE'),
                 ),
                 'viewButtonUrl' => 'Yii::app()->controller->createUrl("view", array("fcrt_id" => $data->fcrt_id))',
-                'updateButtonUrl' => 'Yii::app()->controller->createUrl("update", array("fcrt_id" => $data->fcrt_id))',
+                'updateButtonUrl' => 'Yii::app()->controller->createUrl(
+                                                            "update", 
+                                                            array(
+                                                                "fcrt_id" => $data->fcrt_id,
+                                                                "fcrt_fcrn_id" => $data->fcrt_fcrn_id,
+                                                                "fcrt_date"=>$data->fcrt_date,
+                                                                ))',
                 'deleteButtonUrl' => 'Yii::app()->controller->createUrl("delete", array("fcrt_id" => $data->fcrt_id))',
             ),
         )

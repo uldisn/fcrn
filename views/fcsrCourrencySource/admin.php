@@ -65,6 +65,11 @@ $this->widget('TbGridView',
                 )
             ),
             #'fcsr_notes',
+            array(
+                'name' => 'fcsr_base_fcrn_id',
+                'value' => 'CHtml::value($data, \'fcsrBaseFcrn.itemLabel\')',
+                'filter' => CHtml::listData(FcrnCurrency::model()->findAll(array('limit' => 1000)), 'fcrn_id', 'itemLabel'),
+            ),
 
             array(
                 'class' => 'TbButtonColumn',

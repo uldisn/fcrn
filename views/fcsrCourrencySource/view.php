@@ -61,7 +61,7 @@ array(
                             true
                         )
                     ),
-array(
+            array(
                         'name' => 'fcsr_notes',
                         'type' => 'raw',
                         'value' => $this->widget(
@@ -74,6 +74,17 @@ array(
                             true
                         )
                     ),
+            array(
+                    'name' => 'fcsr_base_fcrn_id',
+                    'value' => ($model->fcsrBaseFcrn !== null)?CHtml::link(
+                                    '<i class="icon icon-circle-arrow-left"></i> '.$model->fcsrBaseFcrn->itemLabel,
+                                    array('/fcrn/fcrnCurrency/view','fcrn_id' => $model->fcsrBaseFcrn->fcrn_id),
+                                    array('class' => '')).' '.CHtml::link(
+                                    '<i class="icon icon-pencil"></i> ',
+                                    array('/fcrn/fcrnCurrency/update','fcrn_id' => $model->fcsrBaseFcrn->fcrn_id),
+                                    array('class' => '')):'n/a',
+                    'type' => 'html',
+                ),                    
            ),
         )); ?>
     </div>

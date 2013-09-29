@@ -33,7 +33,7 @@ abstract class BaseFcrtCurrencyRate extends CActiveRecord
     {
         return array_merge(
             parent::rules(), array(
-                array('fcrt_fcsr_id, fcrt_fcrn_id, fcrt_to_fcrn_id, fcrt_date, fcrt_rate', 'required'),
+                array('fcrt_fcrn_id, fcrt_to_fcrn_id, fcrt_date, fcrt_rate', 'required'),
                 array('fcrt_fcsr_id, fcrt_fcrn_id, fcrt_to_fcrn_id', 'numerical', 'integerOnly' => true),
                 array('fcrt_rate', 'numerical'),
                 array('fcrt_id, fcrt_fcsr_id, fcrt_fcrn_id, fcrt_to_fcrn_id, fcrt_date, fcrt_rate', 'safe', 'on' => 'search'),
