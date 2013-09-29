@@ -140,7 +140,7 @@ public function accessRules() {
         }
     }
 
-    public function actionAdmin($fcrt_fcsr_id = FALSE,$fcrt_fcrn_id = FALSE, $fcrt_date = FALSE)
+    public function actionAdmin($fcrt_fcsr_id = FALSE,$fcrt_fcrn_id = FALSE)
     {
         //currency source
         $mFcsr = FcsrCourrencySource::model()->findAll();
@@ -150,12 +150,12 @@ public function accessRules() {
             $fcrt_date = date('Y.d.m');
         }
         
-        if (isset($_POST['fcrt_date'])) {
-            $fcrt_date = $_POST['fcrt_date'];
-        }
-        if(!$fcrt_date){
-            $fcrt_date = date("Y-m-d");
-        }
+//        if (isset($_POST['fcrt_date'])) {
+//            $fcrt_date = $_POST['fcrt_date'];
+//        }
+//        if(!$fcrt_date){
+//            $fcrt_date = date("Y-m-d");
+//        }
         $model = new FcrtCurrencyRate('search');
         
         $scopes = $model->scopes();
@@ -178,8 +178,8 @@ public function accessRules() {
                     'model' => $model,
                     'fcrt_fcsr_id'=>$fcrt_fcsr_id,
                     'fcrt_fcrn_id'=>$fcrt_fcrn_id,
-                    'fcrt_date'=>$fcrt_date,
-                    'mFcsr' => $mFcsr,
+                    //'fcrt_date'=>$fcrt_date,
+                    //'mFcsr' => $mFcsr,
                 )
                 );
     }

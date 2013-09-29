@@ -1,6 +1,4 @@
 <?php
-echo Yii::app()->language;        
-
 $this->setPageTitle(
     Yii::t('FcrnModule.crud', 'Currency Rates')
     . ' - '
@@ -49,7 +47,7 @@ $this->widget(
         ));
 
 //date fiels
-$this->renderPartial('_form_fcrt_date', array('fcrt_date' => $fcrt_date));
+//$this->renderPartial('_form_fcrt_date', array('fcrt_date' => $fcrt_date));
 
 $aUrlParam = array(
     'fcrt_fcsr_id' => $fcrt_fcsr_id,
