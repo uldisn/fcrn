@@ -85,7 +85,7 @@ public function accessRules() {
         $this->render('create', array('model' => $model));
     }
 
-    public function actionUpdate()
+    public function actionUpdate($fcrt_id)
     {
         $model = $this->loadModel($fcrt_id);
         $model->scenario = $this->scenario;
