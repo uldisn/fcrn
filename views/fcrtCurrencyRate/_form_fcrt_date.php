@@ -35,7 +35,7 @@
                          array(
                                  'name' => 'fcrt_date',
                                  //'attribute' => 'fcrt_date',
-                                 'language' =>  substr(Yii::app()->language, 0, strpos(Yii::app()->language, '_')),
+                                 'language' =>  strstr(Yii::app()->language.'_','_',true),
                                  'htmlOptions' => array('size' => 10),
                                  'options' => array(
                                      'showButtonPanel' => true,

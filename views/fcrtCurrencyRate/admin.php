@@ -1,4 +1,6 @@
 <?php
+echo Yii::app()->language;        
+
 $this->setPageTitle(
     Yii::t('FcrnModule.crud', 'Currency Rates')
     . ' - '
